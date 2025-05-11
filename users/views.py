@@ -46,7 +46,7 @@ def user_logout(request):
 
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):
-    prof = profile.objects.get(user=user)
+    prof, _ = profile.objects.get_or_create(user=user)
     prof.is_online = True
     prof.save()
 
