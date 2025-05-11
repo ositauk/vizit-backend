@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Login Page</title>
+    <style>
+    .content{
+    height: 100%;
+    }
+
+    .content::after {
+      content: "";
+      background: url({% static 'logo.png' %}) left top no-repeat;
+      opacity: 0.1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+      background-size: 64% 100%;
+    }
+    .main {
+            border: 2px solid red;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+    .form-rounded {
+            border-radius: 5rem;
+            width: 300px;
+            height: 50px;
+            padding: 20px 18px;
+            margin: 25px;
+        }
+        h4{
+        font-weight: bold;
+        font-family: 'verdana';
+        font-size-adjust: 0.58;
+        }
+        .form-container{
+        padding: 150px 0px 0 0px;
+        border-radius: 15px;
+        }
+        .form-faq{
+        position: relative;
+        top: 90vh;
+        padding: 0px;
+        border-radius: 15px;
+        border: 2px solid black;
+        }
+
+        .form-image{
+        position: absolute;
+        top: 15vh;
+        left:1vh;
+        border-radius: 15px;
+        border: 2px solid black;
+        }
+        input[type="text"] {
+         font-size:22px;
+        }
+        input[type="password"] {
+         font-size:22px
+        }
+        button[type="submit"] {
+         font-size:20px
+        }
+
+        .Rectangle-1 {
+          width: 380px;
+          height: 55px;
+          margin: 3px 40px 11px 18px;
+          padding: 24px 100px 23px 37px;
+          opacity: 0.7;
+          border-radius: 47px;
+          box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+          border: solid 1px #d5d5d5;
+          background-color: #efefef;
+}
+.Rectangle-3 {
+      width: 380px;
+      height: 55px;
+      margin: 12px 40px 11px 18px;
+      padding: 13px 0px 23px 0px;
+      opacity: 0.7;
+      border-radius: 47px;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+      border: solid 1px #d5d5d5;
+      background-image: linear-gradient(to bottom, #0545a9, #003a94);
+
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #fff;
+}
+img.side-desg {
+      width: 420px;
+    height: 460px;
+    margin: 0;
+    object-fit: contain;
+    padding: 200px 0 0 0;
+    margin: 0 0 0 85px;
+}
+@media (max-width:1450px){
+    img.side-desg {
+    width: 80%;
+    }
+    }
+::placeholder{
+  width: 137px;
+  height: 40px;
+  margin: 0 0 6px 36px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b4b4b4;
+}
+.username_textBox{
+background-image:url({% static 'username_image.png' %});
+background-size: 30px;
+background-position:20px 12px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.password_textBox{
+background-image:url({% static 'password_image.png' %});
+background-size: 30px;
+background-position:20px 12px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.Forgot-username-or-password {
+  width: 229px;
+  height: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #00b1e5;
+}
+.Forgot-username-or-password .text-style-1 {
+  font-weight: 400;
+}
+.FAQs-Support-Contact-Us {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+}
+.faq_details{
+padding: 30px 0 0 0;
+}
+a{
+  color: #707070;
+  text-decoration: none;
+}
+body{
+height: 100%;
+}
+.text-align {
+    text-align: center!important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0 16px 0px 0px;
+}
+.All-Rights-Reserved-Vizit-2021 {
+  padding: 20px 0 0 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #00b1e5;
+}
+.table-space{
+    position: relative;
+    top: 30px;
+}
+.alert-width{
+    width:380px;
+    margin: 0 0 0 10px;
+}
+.alert{
+    position: relative;
+    padding: .75rem 1.25rem;
+    /* margin-bottom: 1rem; */
+    border: 1px solid transparent;
+    border-radius: 2.25rem;
+}
+    </style>
+</head>
+<body>
+<div class=" content">
+<!--    Row first-->
+    <div class="row">
+            <div class="col-7">
+                <div class="row justify-content-center side-desg">
+                        <img src="{% static 'vizit_logo.png' %}" class="side-desg">
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <form class="form-container" action="" method="post">
+                        {% csrf_token %}
+                        <div class="m-4"><h4 class="text-align">User Login</h4></div>
+                          <div class="form-group ">
+                              <input type="text" name="username" class="Rectangle-1 username_textBox" placeholder="Username" autocomplete="off" autocomplete="off" required>
+                          </div>
+                          <div class="form-group">
+                              <input type="password" name="password" class="Rectangle-1 password_textBox" id="exampleInputPassword1" placeholder="Password" autocomplete="off" required>
+                          </div>
+
+                            {% if messages %}
+                        <div>
+                              {% for message in messages %}
+                                <div class="m-2"><a href="#"><p class="text-center alert alert-danger alert-width">{{ message }}</p></a></div>
+                              {% endfor %}
+                        </div>
+                            {% endif %}
+
+                        <button type="submit" class="Rectangle-3">Login</button>
+                        <div class="m-5 text-align"><a href="{% url 'forget_password' %}"><span class="Forgot-username-or-password
+                            "><span class="text-style-1">Forgot</span> username
+                              <span class="text-style-1">or</span>
+                              password <span class="text-style-1">?</span></span></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+<!--    Row second-->
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="row">
+                <form class="container faq_details">
+                    <div class="row FAQs-Support-Contact-Us">
+                        <div class="col-1"></div>
+                        <div class="col-2">
+                            <a href=""><h5>FAQ's</h5></a>
+                        </div>
+                        <div class="col-2">
+                            <a href=""><h5>Support</h5></a>
+                        </div>
+                        <div class="col-3">
+                            <a href=""><h5>Contact Us</h5></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row justify-content-center">
+        <span class="All-Rights-Reserved-Vizit-2021">All Rights Reserved. Vizit © 2021</span>
+    </div>
+
+</body>
+</html>

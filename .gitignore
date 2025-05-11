@@ -1,0 +1,8 @@
+.DS_Store
+env
+Procfile
+MainWeb/__pycache__
+users/__pycache__
+users/migrations/__pycache__
+visiters/__pycache__
+visiters/migrations/__pycache__

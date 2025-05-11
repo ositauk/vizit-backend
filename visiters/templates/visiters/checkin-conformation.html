@@ -1,0 +1,58 @@
+{% extends "visiters/base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="users-colour">
+              <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+            <div class="checkout1">
+                <div>
+                    <h1> <span class="Visitors-Tag-Retreived">Visit</span> <span class="text-style-1">Pin</span> <span
+                            class="text-style-2">{{pin}}</span> </h1>
+                </div>
+                <div>
+                    <img class="visitor-card-3" src="{% static 'images/visitor-card.png'%}" alt="">
+                </div>
+            </div>
+            <div class="checkout2">
+                <h1><span class="Visitors-Tag-Retreived">Visit</span> <span class="text-style-4">Scheduled</span> <span
+                        class="text-style-3">Confirmed {{date}} and {{time}}</h1>
+                <img class="visitor-card-4" src="{% static 'images/confirmation (2)@3x.png'%}" alt="">
+
+            </div>
+            <button onclick="location.href='/'" class="Rectangle-21-button"><span class="CHECK-OUT-ANOTHER-VISITOR">
+                    Check In  Another Visiter
+                </span>
+                <img class="calendar-button-checkout" src="{% static 'images/calendar2.png'%}" alt="">
+            </button>
+
+        </div>
+    </div>
+
+{% endblock%}

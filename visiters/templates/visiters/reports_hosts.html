@@ -1,0 +1,388 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css' %}" >
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript"
+src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    function exportToExcel(tableID){
+    var downloadurl;
+    var dataFileType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '/' + mm + '/' + yyyy;
+    filename = today + 'Host Report.xls';
+    downloadurl = document.createElement("a");
+    document.body.appendChild(downloadurl);
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTMLData], {
+            type: dataFileType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
+        downloadurl.download = filename;
+        downloadurl.click();
+    }
+}
+</script>
+
+<style>
+.reporth-Rectangle-15 {
+
+  opacity: 0.9;
+  border-radius: 40px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+}
+.Rectangle-38 {
+  height: 60px;
+  width: 210px;
+  padding: 0 0 0 0;
+  border-radius: 19px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #fff;
+}
+.searchbox1-img{
+background-image:url({% static 'username_image.png' %});
+background-size: 23px;
+background-position:12px 17px;
+background-repeat:no-repeat;
+padding-left:46px;
+}
+
+.searchbox2-img{
+background-image:url({% static 'date-img.png' %});
+background-size: 23px;
+background-position:12px 17px;
+background-repeat:no-repeat;
+padding-left:46px;
+}
+.searchbutton-img{
+background-image:url({% static 'magnifier.png' %});
+background-size: 25px;
+background-position:23px 19px;
+background-repeat:no-repeat;
+padding-left:46px;
+}
+.Rectangle-45 {
+  width: 75px;
+  height: 60px;
+  margin:  0 0 0 -10px;
+  padding: 32px 28px 31px;
+  border-radius: 27px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #00b1e5;
+}
+#place-holder ::placeholder {
+  width: 200px;
+  height: 50px;
+  margin: 0px 0px 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b4b4b4;
+}
+.Rectangle-47 {
+  width: 170px;
+  height: 48px;
+  margin: 0 0 0 45px;
+  border-radius: 18px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #00b1e5;
+}
+.Rectangle-48 {
+  width: 170px;
+  height: 48px;
+  border-radius: 19px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #0545a9
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.PRINT-REPORT {
+  margin: 0 0 0 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+.EXPORT-REPORT {
+  margin: 0 0 0 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fff;
+}
+.print-img{
+background-image:url({% static 'print-img.png' %});
+background-size: 19px;
+background-position:140px 14px;
+background-repeat:no-repeat;
+padding-right:24px;
+}
+.export-img{
+background-image:url({% static 'allvisitor-img.png' %});
+background-size: 19px;
+background-position:140px 14px;
+background-repeat:no-repeat;
+padding-right:24px;
+}
+.first-letter {
+        text-transform:capitalize;
+        }
+#myTable th {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+#myTable td {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+ .reporth-View {
+  width: 151px;
+  height: 40px;
+  margin: 0.3px 45.5px 54px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #292929;
+}
+.reporth-View .text-style-1 {
+  font-weight: bold;
+}
+.reporth-Details {
+  width: 145px;
+  margin: 0px 50px 0px 010px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+}
+.table-space{
+    position: relative;
+    top: 30px;
+}
+.alert-space{
+    position: relative;
+    top: 20px;
+    margin: auto;
+}
+#special-id {
+  color: black;
+}
+
+.row{
+    margin-right : 0px;
+    margin-left : 0px;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+</style>
+
+<section class="users-colour">
+  <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  <section class="reporth-Rectangle-15 p-5 border border-black">
+  <section class="row">
+    <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'report' %}">Visitors</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#hosts">Hosts</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+
+<!------------------------------------- Second tab view ------------------------------------------------>
+              <div class="tab-pane active" id="hosts">
+
+                  <section class="">
+                    <div class="form-group ">
+
+                        <div>
+
+                            <div class="col my-3">
+                                    <span class="reporth-View">
+                                      Reports -
+                                      <span class="text-style-1">Hosts</span>
+                                        </span>
+                                <div class="row">
+                                        <span class="reporth-Details">Host Details
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    <hr id="special-id">
+                <form class="row" method="get" action="#hosts">
+                    <input type="label" name="Hosts" hidden>
+                <div class="col-3">
+                <input class="Rectangle-38 searchbox1-img me-2" type="search" name="host_name" placeholder="Host Name" aria-label="Search"  autocomplete="off">
+                </div>
+                    <div class="col-3">
+                <input class="Rectangle-38 searchbox2-img me-2" type="search" name="hperiod_from" placeholder="From (yyyy-mm-dd)" aria-label="Search" autocomplete="off">
+                </div>
+                    <div class="col">
+                <input class="Rectangle-38 searchbox2-img me-2" type="search" name="hperiod_to" placeholder="To (yyyy-mm-dd)" aria-label="Search" autocomplete="off">
+                </div>
+                        <div class="col-sm">
+                        <a href="#hosts"><button class="Rectangle-45 searchbutton-img" type="submit"></button></a>
+                        </div>
+                      
+                </form>
+
+
+
+            {% if form1 %}
+            <div class="row table-space">
+
+                <table class="table table-sm borderless table-hover table-striped" id="myTable">
+                    <thead>
+                            <th>Date</th>
+                            <th>Host Name</th>
+                            <th>Host Department</th>
+                            <th>Tag ID</th>
+                            <th>Visitior Name</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>User</th>
+                            </thead>
+                    <tbody>
+                    <div>
+                        {% for f in form1 %}
+                            <tr>
+                                <td>{{f.checkInDate}}</td>
+                                <td class="first-letter">{{f.host.hostname}}</td>
+                                <td>{{f.host.department}}</td>
+                                <td>RVG{{f.visitors.visitorId}}</td>
+                                <td class="first-letter">{{f.visitors.firstname}} <span class="first-letter">{{f.visitors.lastname}}</span></td>
+                                <td>{{f.checkInTime}}</td>
+                                {% if f.checkOutTime %}
+                                  <td>{{f.checkOutTime}}</td>
+                                {% else %}
+                                  <td>--</td>
+                                {% endif %}
+                                <td class="first-letter">{{f.user_name}}</td>
+                            </tr>
+                        {% endfor %}
+                    </div>
+                    </tbody>
+                </table>
+
+            </div>
+                        <div class="row table-space">
+                    <div class="col"></div>
+                            <div class="col-3 my-5 ">
+                                <button class="Rectangle-47 export-img" type="button" onclick="exportToExcel('print_hosts')"><span class="EXPORT-REPORT">Export Report</span></button>
+                </div>
+                <div class="col-3 my-5 ">
+                        <button class="Rectangle-48 print-img" type="submit" id="btn_convert1" value="{{form_values}}" onclick="return printtag(this.value)"><span class="PRINT-REPORT">Print Report</span></button>
+                </div>
+                    </div>
+            </div>
+                        {% endif %}
+                  </section>
+
+
+
+              </div>
+    </form>
+
+            </div>
+                </div>
+
+
+  </section>
+</section>
+ </div>
+  </section>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable({
+    "searching": false,
+    "bLengthChange": false,
+    "info": false,
+    "columnDefs": [ {
+       "targets": [ ],
+       "orderable": false
+    } ],
+    });
+});
+
+function printtag(value) {
+    const doc = window.open("/print_hostReport/" + value, "print_hostReport", "width=950, height=750");
+    doc.print();
+  }
+</script>
+
+{% endblock %}

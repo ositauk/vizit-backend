@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+<link href="{% static 'css/bootstrap.min.css' %}" >
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css' %}"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script>
+</head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 10px;
+}
+.report-first-letter {
+text-transform:capitalize;
+}
+#myTable th {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#myTable td {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+</style>
+<body onload='window.print()'>
+<div class="row", id="print_visitors">
+                <img src="{% static 'images/resized_logo.jpg' %}">
+                <span style="position:relative;top:-30px;left:20px;font-weight:600;">{{company}}</span>
+                <hr>
+                <br>
+                <table class="table table-sm borderless table-hover table-striped table-bordered" id="myTable">
+                    <thead>
+                            <th>Date</th>
+                            <th>Host Name</th>
+                            <th>Host Department</th>
+                            <th>Tag ID</th>
+                            <th>Visitior Name</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>User</th>
+                    </thead>
+                    <tbody>
+                    <div>
+                        {% for f in form1 %}
+                            <tr>
+                                <td>{{f.checkInDate}}</td>
+                                <td class="first-letter">{{f.host.hostname}}</td>
+                                <td>{{f.host.department}}</td>
+                                <td>RVG{{f.visitors.visitorId}}</td>
+                                <td class="first-letter">{{f.visitors.firstname}} <span class="first-letter">{{f.visitors.lastname}}</span></td>
+                                <td>{{f.checkInTime}}</td>
+                                {% if f.checkOutTime %}
+                                  <td>{{f.checkOutTime}}</td>
+                                {% else %}
+                                  <td>--</td>
+                                {% endif %}
+                                <td class="first-letter">{{f.user_name}}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                    </div>
+                    </tbody>
+                </table>
+
+            </div>
+
+</body>
+</html>

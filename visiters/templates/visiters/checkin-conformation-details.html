@@ -1,0 +1,192 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="users-colour">
+  <!-- first block -->
+  <div class="CheckInAVisitor">
+    <span>Check-in-a-Visitor</span>
+  </div>
+  <!-- second block -->
+ <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+            <div class="checkout2">
+                <h1><span class="Visitors-Tag-Retreived">Check - </span> <span class="text-style-4">In</span> <span
+                        class="text-style-3">Confirmed</h1>
+                <img class="visitor-card-4" src="{% static 'images/confirmation (2)@3x.png'%}" alt="">
+
+            </div>
+  <!-- third block  -->
+  <div class="Rectangle-15-checkin">
+    <div class="details-first">
+      <span class="Verify-Check-in-Information">
+        Check-in a Visitor
+      </span>
+      <span class="Visitor-Details-conformation">
+        Visitor Details
+      </span>
+      <div class="Line-15-con"></div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/585e4beacb11b227491c3399@3x.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.firstname}}
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/585e4beacb11b227491c3399@3x.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.lastname}}
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/building.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.visitor_company}}
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/home-address@3x.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.address}}
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/telephone.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.Visitors_phone_number}}
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/briefcase@3x.png'%}" alt="">
+        <span class="John">
+          {{details.visitors.pourpose}}
+        </span>
+      </div>
+      <span class="Host-Details">
+        Host Details
+      </span>
+      <div class="Line-15-con"></div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/briefcase@3x.png'%}" alt="">
+        <span class="John">
+          {{details.host.hostname}}
+
+        </span>
+      </div>
+      <div>
+        <img class="conformation-profile" src="{% static 'images/building.png'%}" alt="">
+        <span class="John">
+          {{details.host.department}}
+        </span>
+      </div>
+
+    </div>
+    <div class="details-second">
+      <div class="card1" id="card1">
+        <div class="card-content">
+          <div class="card-first">
+            <img class="statelogo-big-logo-checkin" src="{% static 'images/statelogo@3x.png' %}" alt="">
+            <span class="RIVERS-STATE-GOVERNMENT-HOUSE-PORT-HARCOURT"> RIVERS STATE GOVERNMENT
+              HOUSE, PORT HARCOURT</span>
+          </div>
+          <img class="person-image" src="{{details.visitors.imageurl}}" alt="">
+          <div class="visitor-name" style="text-align: center;">
+            <span class="JOHN-DOE " style="margin: 0px 0px 0px 0px !important; ">
+              {{details.visitors.firstname}} {{details.visitors.lastname}}
+            </span>
+          </div>
+          <div class="visitor-name" style="text-align: center;">
+            <span class="JOHN-DOE" style="margin: 0px 0px 0px 0px !important;">
+              RVG{{details.id}}
+            </span>
+          </div>
+          <div class="parent-rectange-41">
+            <div class="Rectangle-41">
+              <span class="HOST">
+                HOST
+              </span>
+            </div>
+            <div class="child-2">
+              <span class="Hon-Justice-Amadi">
+                {{details.host.hostname}}
+              </span>
+            </div>
+          </div>
+          <div class="parent-rectange-41">
+            <div class="Rectangle-41">
+              <span class="HOST">
+                Date
+              </span>
+            </div>
+            <div class="child-2">
+              <span class="Hon-Justice-Amadi">
+                {{details.checkInDate}}
+              </span>
+            </div>
+          </div>
+          <div class="parent-rectange-41">
+            <div class="Rectangle-41">
+              <span class="HOST2">
+                CHECK-IN
+              </span>
+            </div>
+            <div class="child-2">
+              <span class="Hon-Justice-Amadi">
+                3:19pm
+              </span>
+            </div>
+          </div>
+          <div class="Rectangle-40">
+            <span class="VISITOR-card">
+              VISITOR
+            </span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction:column; margin-top:20px">
+          <button type="submit" id="btn_convert1" value="{{details.id}}" onclick="return printtag()"
+            class="Rectangle-21-conformation"><span class="CHECK-IN-button-conformation">
+              Print Tag
+            </span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<script>
+  function printtag() {
+    const id = document.getElementById('btn_convert1').value
+    const doc = window.open("/card/" + id, "card", "width=750, height=550");
+    doc.print();
+  }
+</script>
+{% endblock%}

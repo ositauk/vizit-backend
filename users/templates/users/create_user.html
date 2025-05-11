@@ -1,0 +1,276 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css' %}" >
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<style>
+.add-new-user-Rectangle-15 {
+  margin: 36px 0 0 0;
+  padding: 40px 40px 0 40px !important;
+  opacity: 0.9;
+  border-radius: 40px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+}
+.add-new-user-Rectangle-61 {
+  width: 797px;
+  height: 64px;
+  margin: 10px;
+  padding: 0px 19px 0px 57px;
+  border-radius: 22px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #fff;
+}
+::placeholder {
+  width: 200px;
+  height: 50px;
+  margin: 3px 0px 0 23px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b4b4b4;
+}
+
+.add-new-user-Rectangle-21 {
+  width: 237px;
+  height: 65px;
+  margin: 0 0 0 -14px;
+  border-radius: 16px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #0545a9;
+}
+.add-new-user-SAVE-CHANGES {
+  margin: 0px 0px 0px 65px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 589;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+.add-new-user-username-img{
+background-image:url({% static 'username_image.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-role-img{
+background-image:url({% static 'role-img.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-name-img{
+background-image:url({% static 'username_image.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-email-img{
+background-image:url({% static 'email-img.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-pass-img{
+background-image:url({% static 'password-img.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-cpass-img{
+background-image:url({% static 'password-img.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.add-new-user-confirmation-img {
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 35px;
+  object-fit: contain;
+}
+.add-new-user-Users {
+  width: 151px;
+  height: 40px;
+  margin: 0.3px 45.5px 54px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #292929;
+}
+.add-new-user-Users .text-style-1 {
+  font-weight: 500;
+}
+.add-new-user-Details {
+  width: 145px;
+  margin: 0px 50px 0px 010px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+}
+.alert-space{
+    position: relative;
+    top: 5px;
+    margin: auto;
+}
+.alert-width{
+    width:797px;
+}
+.alert {
+    padding: 15px;
+    margin: 0 0 27px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.users-colour{
+    background-color: #f8fcff;
+    padding : 0px 20px 0px 20px;
+    min-height : 1195px;
+    width : 100%;
+}
+</style>
+
+<section class="users-colour">
+   <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  <div>
+  <section class="add-new-user-Rectangle-15 p-5 border border-black">
+  <section class="row">
+
+
+    <div class="form-group ">
+       <div class="row">
+                <div class="col">
+                    <span class="add-new-user-Users">
+                      Add
+                      <span class="text-style-1">New User</span>
+                        </span>
+                        <div class="row">
+                        <span class="add-new-user-Details">User Details
+                        </span>
+                            </div>
+
+
+                </div>
+       </div>
+    <hr>
+
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <div class="input-group-lg mb-3 ">
+        <input type="text" class="add-new-user-Rectangle-61 add-new-user-username-img" aria-label="Sizing example input" placeholder="Username"
+          aria-describedby="inputGroup-sizing-lg" name="username" required oninvalid="Please Fill Username" oninvalid="this.setCustomValidity('Please Enter Username Here in Small Alphabets')"
+          oninput="this.setCustomValidity('')" autocomplete="off">
+      </div>
+
+      <div class="input-group-lg mb-3">
+        <select class="add-new-user-Rectangle-61 add-new-user-role-img show-menu-arrow"  name="role" required oninvalid="this.setCustomValidity('Please Choose Role Here')"
+          oninput="this.setCustomValidity('')">
+            <option ></option>
+            <option>Admin</option>
+            <option>User</option>
+        </select>
+      </div>
+
+      <div class="input-group-lg mb-3">
+        <input type="text" class="add-new-user-Rectangle-61 add-new-user-name-img" aria-label="Sizing example input" placeholder="Name"
+          aria-describedby="inputGroup-sizing-sm" name="first_name" required oninvalid="this.setCustomValidity('Please Enter Name Here')"
+          oninput="this.setCustomValidity('')" autocomplete="off">
+      </div>
+
+      <div class="input-group-lg mb-3">
+        <input type="text" class="add-new-user-Rectangle-61 add-new-user-email-img" aria-label="Sizing example input" placeholder="Email Address"
+          aria-describedby="inputGroup-sizing-sm" name="email" required oninvalid="this.setCustomValidity('Please Enter Email Here')"
+          oninput="this.setCustomValidity('')" autocomplete="off">
+      </div>
+
+      <div class="input-group-lg mb-3">
+        <input type="password" class="add-new-user-Rectangle-61 add-new-user-pass-img" aria-label="Sizing example input" placeholder="Password"
+          aria-describedby="inputGroup-sizing-sm" name="password1" required oninvalid="this.setCustomValidity('Please Enter Password Here')"
+          oninput="this.setCustomValidity('')" autocomplete="off">
+      </div>
+
+      <div class="input-group-lg mb-3" >
+        <input type="password" class="add-new-user-Rectangle-61 add-new-user-cpass-img" aria-label="Sizing example input" placeholder="Confirm Password"
+          aria-describedby="inputGroup-sizing-sm" name="password2" required oninvalid="this.setCustomValidity('Please Enter Password Here')"
+          oninput="this.setCustomValidity('')" autocomplete="off">
+      </div>
+
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert-space"><a href="#"><p class="text-center alert alert-danger alert-width">{{ message }}</p></a></div>
+                  {% endfor %}
+                {% endif %}
+
+      <div>
+          <div class="row justify-content-end">
+                <div class="col-5" >
+              <button type="submit" class="add-new-user-Rectangle-21"><span class="add-new-user-SAVE-CHANGES"> Create</span>
+              <img src="{% static 'save-img.png' %}" class="add-new-user-confirmation-img"></button>
+                </div>
+          </div>
+      </div>
+    </form>
+    </div>
+  </section>
+</section>
+ </div>
+  </section>
+{% endblock %}

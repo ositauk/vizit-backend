@@ -1,0 +1,295 @@
+{% extends "visiters/base.html" %}
+{% load static %}
+{% block content %}
+
+ <div class="mid">
+ <!-- <h1>right</h1> -->
+      <div class="quickCheckin">
+            <div class="quick">
+                <h2 style="size : 20px;">Quick Check-In</h1>
+            </div>
+            <form action="/" onsubmit="return validate()" method="post" name="myform" autocomplete="off">
+              {% csrf_token %}
+              <div class="">
+                <input type="text" class="Rectangle-17 firstnameimage" placeholder="Visitor Name" name="firstname"
+                  id="firstname" hidden >
+                <small></small>
+              </div>
+        
+              <div class="">
+                <input type="text" class="Rectangle-17 firstnameimage" placeholder="phonenumber" name="phonenumber"
+                  id="phonenumber"  hidden>
+                <small></small>
+              </div>
+
+              <div class>
+                <input class="firstnameimage" list="visiter" name="browser" id="visiterbrowsers" onchange="func2()" placeholder = "select a visitor">
+                  <datalist id="visiter" style="display : block;">
+                    {% for h in visiters %}
+                    <option data-value="{{h.visitorId}}" value="{{h.firstname}} {{h.lastname}}" style="display : none;" class="dropbtn "></option>
+                    {% endfor %}
+                  </datalist>
+                  <hr>
+              </div>
+
+              <!-- dropdown    -->
+              <div class>
+                <input list="browsers" name="hostname" id="hostname" class="dropbtn hostnameimage" onchange="fun(this.value)"
+                placeholder="Host name" hidden />
+                <div>
+                  <input id="department" name="department" class="dropbtn departmentimage" placeholder="Department" hidden />
+                </div>
+                <div>
+                  <input name="HostPhoneNumber" class="dropbtn hostnameimage" id="hostphonenumber" placeholder="Host Phone number"
+                    hidden />
+                </div>
+                <div class>
+                  <input class="firstnameimage" list="host" name="browser" id="hostbrowsers" onchange="func()" placeholder = "select a department">
+                    <datalist id="host" style="display : block;">
+                      {% for h in host %}
+                      <option data-value="{{h.id}}" value="{{h.hostname}} ({{h.department}})" style="display : none;" class="dropbtn "></option>
+                      {% endfor %}
+                    </datalist>
+                    <hr>
+                </div>
+
+              </div>
+              <!-- drop down end  -->
+
+              <button type="submit" class="btn btn-info Rectangle-21"><span class="CHECK-IN-button-dashbord">
+                  CHECK IN
+                </span></button>
+
+            </form>
+            <a href="{% url 'logout_user' %}">
+              <button type="submit " class="Rectangle-21">
+                  <span
+                      class="CHECK-IN-button-dashbord">
+                      END OF SHIFT
+                  </span>
+              </button>
+            </a>
+      </div>
+ </div>
+
+<div class="right">
+
+  <div class="general">
+
+    <div class="genralinfo">
+      <div class="genralinfo-welcome"> <span class="Welcome-Admin">
+          Welcome {{username}}
+        </span>
+      </div>
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="first">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="first">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="first">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="Rectangle-15">
+      <h2 class="Select-a-task">Select a task </h2>
+      <div class="task1">
+        <div onclick="location.href='/checkin'" class="select-task-box">
+          <div class="select-task-img">
+            <img class="confirmation-2" src="{% static 'images/confirmation (2)@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">CHECK-IN</h1>
+          <h1 class="select-task-subhead">Check-in visitor for a visit</h1>
+        </div>
+
+        <div onclick="location.href='/checkout'" class="select-task-box">
+          <div class="select-task-img">
+          <img class="confirmation-2" src="{% static 'images/logout@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">CHECK-OUT</h1>
+          <h1 class="select-task-subhead">Close out on a finished visit</h1>
+        </div>
+
+        <div onclick="location.href='/schedulevisit'" class="select-task-box">
+          <div class="select-task-img">
+            <img class="confirmation-2" src="{% static 'images/calendar (4)@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">SCHEDULE A VISIT</h1>
+          <h1 class="select-task-subhead">Pre-schedule a visit</h1>
+        </div>
+
+      </div>
+      <div class="task2">
+        <div onclick="location.href='/show_visiter'" class="select-task-box">
+          <div class="select-task-img">
+            <img class="confirmation-2" src="{% static 'images/clipboard@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">VISITORS LIST</h1>
+          <h1 class="select-task-subhead">View Whitelisted and Blacklisted Visitors </h1>
+        </div>
+
+        <div onclick="location.href='/report'" class="select-task-box">
+          <div class="select-task-img">
+          <img class="confirmation-2" src="{% static 'images/pie-chart (2)@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">REPORTS</h1>
+          <h1 class="select-task-subhead">View Weekly,monthly and annual reports</h1>
+        </div>
+        <div onclick="location.href='/setting'" class="select-task-box">
+          <div class="select-task-img">
+            <img class="confirmation-2" src="{% static 'images/settings (6)@3x.png' %}" alt="">
+          </div>
+          <h1 class="select-task-head">SETTINGS</h1>
+          <h1 class="select-task-subhead">Setup your profile and preferences</h1>
+        </div>
+      </div>
+      <h1 class="Visitors-Reports">Visitor's Reports</h1>
+      <div class="monthly-weekly-report">
+
+        <div onclick="location.href='/weekly_report/'" class="Rectangle-27">
+          <div class="select-task-img">
+            <img class="file" src="{% static 'images/file@3x.png' %}" alt="">
+          </div>
+            <span class="Weekly-Reports">
+              Weekly Report
+            </span>
+        </div>
+
+        <div onclick="location.href='/monthly_report/'" class="Rectangle-35">
+          <div class="select-task-img">
+
+            <img class="file" src="{% static 'images/file@3x.png' %}" alt="">
+          </div>
+            <h1 class="Monthly-Reports">Monthly reports</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+   function showLoading() {
+    document.getElementById("loading").style.display = "block";
+  }
+
+  function hideLoading() {
+    document.getElementById("loading").style.display = "none";
+  }
+
+
+
+
+  function func(){
+      var value = $('#hostbrowsers').val();
+   
+      fun($('#host [value="' + value + '"]').data('value'));
+  }
+
+  function func2(){
+    var value = $('#visiterbrowsers').val();
+    
+    fun2($('#visiter [value="' + value + '"]').data('value'));
+  }
+
+  async function fun(val) {
+    if (val) {
+      showLoading()
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          const departmentname = res.department;
+          const phone = res.phoneNumber;
+          const name = res.hostname
+          let host = document.getElementById('hostname')
+          let hostphonenumber = document.getElementById('hostphonenumber')
+          let dep = document.getElementById('department')
+          host.value = name
+          hostphonenumber.value = phone
+          dep.value = departmentname
+          hideLoading()
+        }
+      };
+      xhttp.open("GET", "getuserdetails/" + val, true);
+      xhttp.send();
+    }
+
+  }
+  async function fun2(val) {
+    if (val) {
+      showLoading()
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const res = JSON.parse(this.responseText);
+          let name = document.getElementById('firstname')
+          let phone = document.getElementById('phonenumber')
+          name.value = res.firstname
+          phone.value = res.phoneNumber
+          hideLoading()
+        }
+      };
+      xhttp.open("GET", "getvisitorsdetails/" + val, true);
+      xhttp.send();
+    }
+  }
+  function validate() {
+    var firstname = document.getElementById('firstname').value.trim()
+    var hostname = document.getElementById('hostname').value.trim()
+    var dep = document.getElementById('dep').value.trim()
+    if ((firstname.length <= 1) || (firstname.length >= 30)) {
+      alert("not valid")
+      return false
+    }
+    else if ((hostname.length <= 1) || (hostname.length >= 30)) {
+      alert("not valid")
+      return false
+    }
+    else if ((dep.length <= 1) || (dep.length >= 50)) {
+      alert("not valid")
+      return false
+    }
+    else {
+      return true
+    }
+  }
+  /*dropdown function */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  }
+
+</script>
+{% endblock%}

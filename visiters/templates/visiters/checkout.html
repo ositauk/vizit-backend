@@ -1,0 +1,134 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="users-colour">
+        <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+        {% if checkoutSuccessful %}
+        <div class="cheakout" style="width: 100%;">
+                <div class="checkout1">
+                        <div>
+                                <h1> <span class="Visitors-Tag-Retreived">Visitor</span> <span
+                                                class="text-style-1">Tag</span> <span
+                                                class="text-style-2">Retreived</span> </h1>
+
+                        </div>
+                        <div>
+                                <img class="visitor-card-3" src="{% static 'images/visitor-card.png'%}" alt="">
+
+                        </div>
+                </div>
+                <div class="checkout2">
+                        <h1><span class="Visitors-Tag-Retreived">Visitor</span> <span
+                                        class="text-style-4">Check-out</span> <span
+                                        class="text-style-3">Confirmed</span> </h1>
+                        <img class="visitor-card-4" src="{% static 'images/confirmation (2)@3x.png'%}" alt="">
+
+                </div>
+                <button onclick="location.href='/checkout'" class="Rectangle-21-button"><span
+                                class="CHECK-OUT-ANOTHER-VISITOR">
+                                CHECK-OUT-ANOTHER-VISITOR
+                        </span>
+                        <img class="calendar-button-checkout" src="{% static 'images/calendar2.png'%}" alt="">
+
+                </button>
+        </div>
+        {% else %}
+        <div class="cheakout" style="width: 100%;">
+                <h1 class="Check-out-a-Visitor">Checkout a visitor</h1>
+                <p class="Visitor-Details-checkout">visitor detail</p>
+                <div class="Line-15-checkout"></div>
+                <form action="/checkout/" class="checkoutform" method="post">
+                        {% csrf_token %}
+
+                        <input type="text" class="Rectangle-17-checkin checkoutimg" placeholder="Enter Visitor Tag ID"
+                                name="tagid" id="firstname" required>
+                        <button type="submit" class="Rectangle-38-checkoutbutton"><span class="SEARCH">
+                                        SEARCH
+                                </span>
+                                <img class="magnifier-2" src="{% static 'images/magnifier (2)@3x.png'%}" alt="">
+                        </button>
+                        <input type="text" value="gettag" name="action" hidden>
+                </form>
+                {% if tagid %}
+                <table class="table">
+                        <thead>
+                                <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Host name</th>
+                                        <th scope="col">Check IN time</th>
+                                        <th scope="col">Date</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>{{tagid.visitors.firstname}}</td>
+                                        <td>{{tagid.host.hostname}}</td>
+                                        <td>{{tagid.checkInTime}}</td>
+                                        <td>{{tagid.checkInDate}}</td>
+
+                                </tr>
+                        </tbody>
+                </table>
+                <form action="" onsubmit="return validation()" method="post">
+                        {% csrf_token %}
+                        <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="idretrived" value=""
+                                        id="flexCheckDefault">
+                                <label class="form-check-label Retrive-id-tag" for="flexCheckDefault">
+                                        Retrived ID TAG
+                                </label>
+                        </div>
+                        <input type="text" value="{{tagid.id}}" name="tagid" hidden>
+                        <input type="text" value="checkouttag" name="action" hidden>
+                        <button type="submit" class="btn btn-primary my-2 Rectangle-46-checkout-button"><span
+                                        class="CHECK-OUT-button">
+                                        CHECK-OUT
+                                </span>
+                                <img class="sign-out-option" src="{% static 'images/sign-out-option@3x.png'%}" alt="">
+                        </button>
+                </form>
+                {% endif %}
+        </div>
+        {% endif %}
+</div>
+<script>
+        function validation() {
+                const rbs = document.querySelectorAll('input[name="idretrived"]');
+                for (const rb of rbs) {
+                        if (!rb.checked) {
+                            alert("Visitor ID Tag Is Not Retrived !!!")
+                            return false
+                        }
+                    }
+        }
+</script>
+{% endblock%}

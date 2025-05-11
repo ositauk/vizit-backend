@@ -1,0 +1,98 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+<style>
+.RIVERS-STATE-GOVERNMENT-STYLE{
+
+height: 39px;
+
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: 25px;
+font-weight: 600;
+font-stretch: normal;
+font-style: normal;
+line-height: 1.13;
+letter-spacing: normal;
+text-align: center;
+color: #292929;
+}
+</style>
+
+
+<div class="users-colour">
+  <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>  <div class="seatinginfo">
+
+      <div class="complogo">
+        <span class="COMPANY-LOGO">
+          COMPANY LOGO
+        </span>
+        <img class="statelogo-big-logo" src="{{form.compLogo.url}}" />
+        {% if request.user.profile.role == 'admin' %}
+          <a href="{% url 'edit_setting' %}"><img class="setting-edit" src="{% static 'images/setting_edit_logo.png' %}"></a>
+          {% endif %}
+      </div>
+
+      <div class="compinfo">
+        <div>
+          <span class="COMPANY-NAME">
+            COMPANY NAME
+          </span>
+        </div>
+        <br>
+        <div>
+          <span class="RIVERS-STATE-GOVERNMENT-STYLE">
+            {{form.compName}}
+          </span>
+        </div>
+        {% if request.user.profile.role == 'admin' %}
+          <a href="{% url 'edit_setting' %}"><img class="setting-edit1" src="{% static 'images/setting_edit_logo.png' %}"></a>
+        {% endif %}
+        <br>
+        <br>
+        <div>
+          <span class="CONTACT-EMAIL-ADDRESS">
+            CONTACT EMAIL
+          </span>
+        </div>
+        <br>
+        <div>
+          <span class="adminrvsghcom">
+            {{form.compEmail}}
+          </span>
+          {% if request.user.profile.role == 'admin' %}
+            <a href="{% url 'edit_setting' %}"><img class="setting-edit2" src="{% static 'images/setting_edit_logo.png' %}"></a>
+          {% endif %}
+        </div>
+        
+        
+      </div>
+  </div>
+</div>
+{% endblock%}

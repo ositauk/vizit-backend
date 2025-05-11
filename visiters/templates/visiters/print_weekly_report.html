@@ -1,0 +1,73 @@
+{% block content %}
+{% load static %}
+
+<link href="{% static 'css/bootstrap.min.css' %}" >
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css' %}"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 10px;
+}
+.report-first-letter {
+text-transform:capitalize;
+}
+#myTable th {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#myTable td {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+</style>
+              <div class="row", id="print_visitors">
+                <img src="{% static 'images/resized_logo.jpg' %}">
+                <span style="position:relative;top:-30px;left:20px;font-weight:600;">{{company}}</span>
+                <hr>
+                <br>
+                <table class="table table-sm borderless table-hover table-striped table-bordered" id="myTable">
+                    <thead>
+                            <th>Date</th>
+                            <th>Visitor</th>
+                            <th>Tag ID</th>
+                            <th>Phonenumber</th>
+                            <th>Host</th>
+                            <th>Department</th>
+                            <th>TimeIn</th>
+                            <th>TimeOut</th>
+                            <th>User</th>
+                    </thead>
+                    <tbody>
+                    <div>
+                        {% for f in form %}
+                            <tr>
+                                <td>{{f.checkInDate}}</td>
+                                <td class="report-first-letter">{{f.visitors.firstname}} {{f.visitors.lastname}}</td>
+                                <td>RVG{{f.visitors.visitorId}}</td>
+                                <td>{{f.visitors.Visitors_phone_number}}</td>
+                                <td class="report-first-letter">{{f.host.hostname}}</td>
+                                <td class="report-first-letter">{{f.host.department}}</td>
+                                <td>{{f.checkInTime}}</td>
+                                <td>
+                                {% if f.checkOutTime %}
+                                    {{f.checkOutTime}}
+                                {% else %}
+                                    --
+                                {% endif %}
+                                </td>
+                                <td class="report-first-letter">{{f.user_name}}</td>
+                            </tr>
+                        {% endfor %}
+                    </div>
+                    </tbody>
+                </table>
+
+            </div>
+
+{% endblock %}

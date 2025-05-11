@@ -1,0 +1,352 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/bootstrap-utilities.min.css' %}" rel="stylesheet" media="all">
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script>
+
+<div class="users-colour">
+        <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+        {% if sucess %}
+        <div class="schedule-right-form">
+                <h1>Schedule Visit</h1>
+                <p class="Host-Details">Host Details</p>
+                <div class="Line-15"></div>
+                <form action="/schedulevisit/" method='post'>
+                        {% csrf_token %}
+                        <button type="submit" class="schedulevisitbotton"><span class="VIEW-SCHEDULED-VISITS-button">
+                                        VIEW SCHEDULE
+                                </span>
+                                <img class="calendar-4" src="{% static 'images/calendar (3)@3x.png'%}" alt="">
+
+                        </button>
+                        <input type="text" value="schedulevisit" name="action" hidden>
+                </form>
+
+                <form action="/schedulevisit/" method="post">
+
+                        {% csrf_token %}
+                        <div>
+                                <input list="browsers" name="hostname" class="Rectangle-15-schedulevisit hostnameimage" id="hostname" oninput="fun2(this.value);" onchange="fun(this.value)"  placeholder="Host name" onkeyup='saveValue(this);'/>
+                                <datalist id="browsers">
+                                  {% for h in host %}
+                                    <option value="{{h.hostname}}" label="{{h.Host_phone_number}} & {{h.department}}   "  ></option>
+                                  {% endfor %}
+                                  <hr>
+                                </datalist>
+                              </div>
+                        
+                              <div>
+                                <input list="Hostdepartment" name="department" class="Rectangle-15-schedulevisit departmentimage" id="department" placeholder="Department" onkeyup='saveValue(this);' readonly/>
+
+                              </div>
+                              <div>
+                                <input list="phoneno" name="HostPhoneNumber" class="Rectangle-15-schedulevisit phonenumberimg" placeholder="Host Phone number" id="phoneno" onkeyup='saveValue(this);' readonly/>
+                                
+                              </div>
+                        <span class="Visitor-Details-line">
+                                Visitor Details
+                        </span>
+                        <div class="Line-15"></div>
+
+                        <div class="input-group input-group-sm">
+
+                                <input type="text" class="Rectangle-15-schedulevisit firstnameimage-checkin"
+                                        aria-label="Sizing example input" placeholder="First name"
+                                        aria-describedby="inputGroup-sizing-sm" name="firstname" id="firstname"
+                                        required onkeyup='saveValue(this);'>
+                        </div>
+
+                        <div class="input-group input-group-sm">
+
+                                <input type="text" class="Rectangle-15-schedulevisit lastnameimg"
+                                        aria-label="Sizing example input" placeholder="Last name "
+                                        aria-describedby="inputGroup-sizing-sm" name="lastname" id="lastname" required onkeyup='saveValue(this);'>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                                <div class="">
+                                        <label for="phonenum">Phone Number (format: +xxx-xxxxxxxxx):</label><br/>
+                                        <input id="phonenumber" class="Rectangle-15-schedulevisit phonenumberimg" name="Visiterphonenumber" placeholder="+234-XXXXXXXXXX"  type="tel" pattern="^\+\d{3}[ -]{0,1}\d{10,11}$" required  onkeyup='saveValue(this);'>
+                                      </div>
+                        </div>
+
+                        <!-- this f  -->
+                        <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="Rectangle-15-schedulevisit companyimg"
+                                        aria-label="Sizing example input" placeholder="Company Name"
+                                        aria-describedby="inputGroup-sizing-sm" name="compname"
+                                        id="compname" required onkeyup='saveValue(this);'>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="Rectangle-15-schedulevisit companyaddreshimg"
+                                        aria-label="Sizing example input" placeholder="Contact Address"
+                                        aria-describedby="inputGroup-sizing-sm" name="address"
+                                        id="address" required onkeyup='saveValue(this);'>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+
+                                <input type="text" class="Rectangle-15-schedulevisit pourposeofvisitimg"
+                                        aria-label="Sizing example input" placeholder="Purpose of Visit"
+                                        aria-describedby="inputGroup-sizing-sm" name="purposeofvisit"
+                                        id="purposeifvisit" required onkeyup='saveValue(this);'>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                                <input type="date" class="Rectangle-15-schedulevisit dateimage "
+                                        aria-label="Sizing example input" placeholder="Date of visit" id="date"
+                                        aria-describedby="inputGroup-sizing-sm" name="date" required onkeyup='saveValue(this);'>
+                        </div>
+                        <script>
+                                $(function () {
+                                        $('.date-withicon').datepicker({
+                                                format: 'mm-dd-yyyy'
+                                        });
+                                });
+                        </script>
+                        <div class="input-group input-group-sm mb-3">
+                                <input type="time" class="Rectangle-15-schedulevisit" aria-label="Sizing example input"
+                                        placeholder="time of visit" aria-describedby="inputGroup-sizing-sm" name="time"
+                                        id="time" required onkeyup='saveValue(this);'>
+                        </div>
+                        <button type="submit" class="schedule-visit-botton schedulevisitimg"><span
+                                        class="SCHEDULE-VISIT-BUTTON">
+                                        SCHEDULE VISIT
+                                </span>
+                                <img class="calendar-3" src="{% static 'images/calendar.png'%}" alt="">
+                        </button>
+                        <input type="text" value="sc" name="action" hidden>
+                </form>
+        </div>
+        {% else %}
+        <div class="cheakout" style="width: 100%;">
+                <h1>View schedule visit</h1>
+                <p class="visiterlist-Details "> Visitor Details</p>
+                <hr>
+                <form method='post'>
+                        {% csrf_token %}
+
+                        <input class="users-Rectangle-38 viewschedule-search checkoutimg" type="text" placeholder="Search"
+
+                                aria-label=".form-control-lg example" name="tagid" required>
+                        <button type="submit" class="Rectangle-38-checkoutbutton"><span class="SEARCH">
+                                SEARCH
+                        </span>
+                        <img class="magnifier-2" src="{% static 'images/magnifier (2)@3x.png'%}" alt=""></button>
+                        <input type="text" value="visit" name="action" hidden>
+                </form>
+                {% if not tagid %}
+                <div class="Rectangle-15-viewschedule">
+                        
+                        <table id="myTable2" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                <thead>
+                                  <tr>
+                                        <th class="th-sm">Visitor ID
+                                        </th>
+                                    <th class="th-sm">Visitor Name
+                              
+                                    </th>
+                                    <th class="th-sm">Host Name
+                              
+                                    </th>
+                                    <th class="th-sm">Visitor Phone number
+                              
+                                    </th>
+                                    <th class="th-sm">Host Department
+                              
+                                    </th>
+                                    <th class="th-sm">Schedule Date
+                              
+                                    </th>
+                                    <th class="th-sm">Schedule Time
+                                    </th>
+                                    <th class="th-sm">Visit Pin
+                                        </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in schedulevisits  %}
+                                  <tr>
+                                <td>RVG{{data.visitors.visitorId}}</td>
+                                    <td>{{data.visitors.firstname}}</td>
+                                    <td>{{data.host.hostname}}</td>
+                                    <td>{{data.visitors.Visitors_phone_number}}</td>
+                                    <td>{{data.host.department}}</td>
+                                    <td>{{data.schedule_date}}</td>
+                                    <td>{{data.schedule_time}}</td>
+                                    <td>{{data.schedule_pin}}</td>
+                                  </tr>
+                                {% endfor %}
+                                </tbody>
+                              </table>
+                </div>
+                {% endif %}
+                {% if tagid %}
+                <table class="table">
+                        <thead>
+                                <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Host name</th>
+                                        <th scope="col">Check IN time</th>
+                                        <th scope="col">Date</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>{{tagid.visitors.firstname}}</td>
+                                        <td>{{tagid.host.hostname}}</td>
+                                        <td>{{tagid.schedule_date}}</td>
+                                        <td>{{tagid.schedule_time}}</td>
+                                </tr>
+                        </tbody>
+                </table>
+                <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="{{tagid.id}}" name="tagid" hidden>
+                        <input type="text" value="delete" name="action" hidden>
+                        <button type="submit" class="btn btn-primary my-2">Delete</button>
+                </form>
+                {% endif %}
+
+        </div>
+        {% endif %}
+</div>
+<script>
+
+        $(document).ready(function(){
+                $('#myTable2').dataTable({
+                "searching": false,
+                "bLengthChange": false,
+                "info": false,
+                "columnDefs": [ {
+                   "targets": [ ],
+                   "orderable": false
+                } ],
+                });
+            });
+</script>
+
+<script>
+
+        function fun2() {
+                var val = document.getElementById("hostname").value;
+                var opts = document.getElementById('browsers').childNodes;
+                for (var i = 0; i < opts.length; i++) {
+                  if (opts[i].value === val) {
+                    // An item was selected from the list!
+                    // yourCallbackHere()
+                    const myArray = opts[i].label.split(" ");
+                    document.getElementById("department").value = myArray[2];
+                    document.getElementById("phoneno").value = myArray[0];
+                    saveValue(document.getElementById("department"));
+                    saveValue(document.getElementById("phoneno"));
+                    break;
+                  }
+                }
+        }
+
+
+        document.getElementById("firstname").value = getSavedValue("firstname");    // set the value to this input
+        document.getElementById("lastname").value = getSavedValue("lastname");   // set the value to this input
+        document.getElementById("compname").value = getSavedValue("compname");
+        document.getElementById("address").value = getSavedValue("address");
+        document.getElementById("hostname").value = getSavedValue("hostname");
+        document.getElementById("department").value = getSavedValue("department");
+        document.getElementById("phonenum").value = getSavedValue("phonenum");
+        document.getElementById("purposeifvisit").value = getSavedValue("purposeifvisit");
+        document.getElementById("date").value = getSavedValue("date");
+        document.getElementById("phonenumber").value = getSavedValue("phonenumber");
+        document.getElementById("time").value = getSavedValue("time");
+
+
+
+
+        /* Here you can add more inputs to set value. if it's saved */
+
+        //Save the value function - save it to localStorage as (ID, VALUE)
+        function saveValue(e){
+        var id = e.id;  // get the sender's id to save it .
+        var val = e.value; // get the value.
+        localStorage.setItem(id, val);// Every time user writing something, the localStorage's value will override .
+        }
+
+  //get the saved value function - return the value of "v" from localStorage.
+        function getSavedValue  (v){
+        if (!localStorage.getItem(v)) {
+                return "";// You can change this to your defualt value.
+        }
+        return localStorage.getItem(v);
+        }
+
+        function validate() {
+                var firstname = document.getElementById('firstname').value.trim()
+                var hostname = document.getElementById('hostname').value.trim()
+                var dep = document.getElementById('dep').value.trim()
+                var lastname = document.getElementById('lastname').value.trim()
+                var compname = document.getElementById('compname').value.trim()
+                var address = document.getElementById('address').value.trim()
+                var phonenumber = document.getElementById('phonenumber').value.trim()
+                var purposeifvisit = document.getElementById('purposeifvisit').value.trim()
+                if ((firstname.length <= 1) || (firstname.length >= 30)) {
+                        alert("not valid")
+                        return false
+                }
+                else if ((hostname.length <= 1) || (hostname.length >= 30)) {
+                        alert("not valid")
+                        return false
+                }
+                else if ((dep.length <= 1) || (dep.length >= 50)) {
+                        alert("not valid")
+                        return false
+                }
+                else if ((lastname.length <= 1) || (lastname.length >= 30)) {
+                        alert("not valid")
+                        return false
+                }
+                else if ((compname.length <= 2) || (lastname.length >= 50)) {
+                        alert("not valid")
+                        return false
+                }
+                else if (phonenumber.length != 10) {
+                        alert("not valid")
+                        return false
+                }
+                else if ((purposeifvisit.length <= 5) || (purposeifvisit.length >= 100)) {
+                        alert("not valid")
+
+                        return false
+                }
+                else {
+                        return true
+                }
+        }
+</script>
+
+{% endblock%}

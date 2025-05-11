@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      input[type="tel"] {
+        border: 1px solid #ddd;
+        padding: 4px 8px;
+      }
+      input[type="tel"]:focus {
+        border: 1px solid #000;
+      }
+      
+      input[type="submit"] {
+        font-weight: bold;
+        padding: 4px 8px;
+        border:1px solid #000;
+        background: #3b5998;
+        color:#fff;
+      }
+      
+      form {
+        width: 50%;
+        margin: 0 auto;
+      }
+      
+      .p {
+        padding-top: 30px;
+      }
+    </style>
+</head>
+<body>
+  <form>
+    <h2>Phone Number Validation</h2>
+    <label for="phonenum">Phone Number (format: xxxx-xxx-xxxx):</label><br/>
+    <input id="phonenum" type="tel" placeholder="+234-XXXXXXXXXX" pattern="^\+\d{3}[ -]{0,1}\d{10,11}$" required >
+    
+    <input type="submit" value="Submit">
+    <p class="p">Demo by Agbonghama Collins. <a href="http://www.sitepoint.com/client-side-form-validation-html5/">See article</a>.</p>
+  </form>
+</body>
+</html>

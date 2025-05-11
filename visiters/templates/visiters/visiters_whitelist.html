@@ -1,0 +1,387 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css' %}" >
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet"
+href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript"
+src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<style>
+.whitelist-Rectangle-15 {
+  width: 100%;
+  min-height: 1195px;
+  margin: 36px 0px 20px 0;
+  padding: 40px 40px 0 40px !important;
+  opacity: 0.9;
+  border-radius: 40px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+}
+.first-letter {
+text-transform:capitalize;
+}
+.whitelist-Rectangle-221 {
+  width: 180px;
+  height: 48px;
+  margin: 0 0 0 0;
+  border-radius: 18px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #00b1e5;
+}
+.whitelist-Rectangle-222 {
+  width: 180px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #0545a9;
+}
+.whitelist-Rectangle-223 {
+  width: 180px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #292929;
+}
+.whitelist-VIEW-ALL-VISITORS {
+  width: 124px;
+  height: 19px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+::placeholder {
+  width: 156px;
+  height: 67px;
+  margin: 3px 0px 0 23px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b4b4b4;
+}
+.searchbox-img{
+background-image:url({% static 'magnifier-black.png' %});
+background-size: 25px;
+background-position:20px 19px;
+background-repeat:no-repeat;
+padding-left:70px;
+}
+.magnifier {
+  width: 23px;
+  height: 23px;
+  margin: -6px 0px 0px -82px;
+  object-fit: contain;
+}
+.whitelist-SEARCH {
+  margin: 0px 129px 0 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.edit-image {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+.whitelist-allvisitor-img{
+background-image:url({% static 'allvisitor-img.png' %});
+background-size: 19px;
+background-position:147px 14px;
+background-repeat:no-repeat;
+padding-right:24px;
+}
+.whitelist-whitelistvisitor-img{
+background-image:url({% static 'whitelist-white.png' %});
+background-size: 19px;
+background-position:147px 14px;
+background-repeat:no-repeat;
+padding-right:24px;
+}
+.whitelist-blacklistvisitor-img{
+background-image:url({% static 'blacklist-white.png' %});
+background-size: 21px;
+background-position:147px 14px;
+background-repeat:no-repeat;
+padding-right:24px;
+}
+.Rectangle-45 {
+  width: 250px;
+  height: 23px;
+  padding: 20px 10px 43px 85px;
+  border-radius: 19px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #00b1e5;
+}
+.Rectangle-38 {
+  height: 60px;
+  width: 683px;
+  padding: 29px 0px 33px 63px;
+  border-radius: 19px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #d5d5d5;
+  background-color: #fff;
+}
+.next-button {
+  margin: 0 0 0 0px;
+  border-radius: 16px;
+  background-color:#f0f0f0;
+}
+.prev-button {
+  margin: 0 0 0 0px;
+  border-radius: 16px;
+  background-color:#f0f0f0;
+}
+#myTable th {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+#myTable td {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+.unlist-btn{
+width: 80px;
+height: 35px;
+border-radius: 10px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: 14px;
+font-weight: bold;
+background-color:#cdcfd4;
+}
+.whitelist-View {
+  margin: 0 0 0 -5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #292929;
+}
+.whitelist-View .text-style-1 {
+  font-weight: bold;
+}
+.whitelist-Details {
+  width: 170px;
+  margin: 0px 50px 0px 010px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+}
+.table-space{
+    position: relative;
+    top: 30px;
+}
+
+input[type=search]{
+  width : 650px;
+}
+</style>
+
+<section class="users-colour">
+    <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  <div>
+  <section class="whitelist-Rectangle-15 p-5 border border-black">
+  <section class="row">
+
+    <section class="co">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-3">
+                    <span class="whitelist-View">
+                      Whitelisted
+                      <span class="text-style-1">Visitors</span>
+                        </span>
+                <div class="row">
+                        <span class="whitelist-Details">
+                            Visitor Details
+                        </span>
+                </div>
+            </div>
+
+                <div class="col">
+                    <div class="row">
+                        <div class="col"></div>
+                     <div class="col-3">
+                         <a href="{% url 'show_visiter' %}"><button type="button" class="whitelist-Rectangle-221 whitelist-allvisitor-img"><span class="whitelist-VIEW-ALL-VISITORS">All Visitors</span></button></a>
+                     </div>
+                     <div class="col-3">
+                        <a href="{% url 'visiter_whitelist' %}"><button type="button" class="whitelist-Rectangle-222 whitelist-whitelistvisitor-img"><span class="whitelist-VIEW-ALL-VISITORS">Whitelist Visitors</span></button></a>
+                     </div>
+                     <div class="col">
+                        <a href="{% url 'visiter_blacklist' %}"><button type="button" class="whitelist-Rectangle-223 whitelist-blacklistvisitor-img"><span class="whitelist-VIEW-ALL-VISITORS"> Blacklist Visitors</span></button></a>
+                     </div>
+                  </div>
+
+        </div>
+        </div>
+    <hr>
+
+
+       <form class="row" method="get" action="{% url 'visiter_whitelist' %}">
+                {% csrf_token %}
+                <div class="col-sm">
+                <input class="Rectangle-38 searchbox-img me-2" type="search" name="search" placeholder="Full Name" aria-label="Search" autocomplete="off" required>
+                </div>
+                        <div class="col-sm">
+                        <button class="Rectangle-45" type="submit"><span class="whitelist-SEARCH">SEARCH</span>
+                        <img class="magnifier" src="{% static 'magnifier.png' %}"></button></div>
+                   
+       </form>
+
+
+                <div class="row table-space">
+
+                        <table class="table table-sm borderless table-hover table-striped" id="myTable">
+                <thead>
+                        <th>Date</th>
+                        <th>Tag ID</th>
+                        <th> Visitor Name</th>
+                        <th>Host</th>
+                        <th>Department</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>List</th>
+                        {% if request.user.profile.role == 'admin' %}
+                        <th>Actions</th>
+                {% endif %}
+                </thead>
+                            <tbody>
+                        <div>
+
+                        {% for f in form %}
+                        <tr>
+                            <td>{{f.checkInDate}}</td>
+
+                            <td>RVG{{f.id}}</td>
+                            <td class="first-letter">{{f.visitors.firstname}} 
+                            <span class="first-letter"> 
+                            {% if f.visitors.lastname == '1' %}
+                            
+                            {% else %} 
+                            {{f.visitors.lastname}}
+                            {% endif %}
+                            </span></td>
+                            <td class="first-letter">{{f.host.hostname}}</td>
+                            <td class="first-letter">{{f.host.department}}</td>
+                            <td>{{f.checkInTime}}</td>
+                            <td>
+                            {% if f.checkOutTime %}
+                              {{f.checkOutTime}}
+                            {% else %}
+                              --
+                            {% endif %}
+                            </td>
+                            <td>
+                            {% if f.visitors.blacklisted == 1 %}
+                                Whitelist
+                            {% elif f.visitors.blacklisted == 2 %}
+                                Blacklist
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                            {% if request.user.profile.role == 'admin' %}
+                                <td>
+                                        <div>
+                                                <div class="row">
+                                                        <div class="col" >
+                                                        <a href="{% url 'user_to_blankentry' f.visitors.visitorId %}" onClick="return confirm('Are you sure to unlist..!!')"><button class="btn unlist-btn" type="button" >unlist</button></a>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </td>
+                            {% endif %}
+                        </tr>
+
+                        {% endfor %}
+                                </div>
+                            </tbody>
+                </table>
+                </div>
+
+    </form>
+    </div>
+  </section>
+  </section>
+</section>
+ </div>
+  </section>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable({
+    "searching": false,
+    "bLengthChange": false,
+    "info": false,
+    "columnDefs": [ {
+       "targets": [ ],
+       "orderable": false
+    } ],
+    });
+});
+</script>
+
+{% endblock %}

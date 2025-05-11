@@ -1,0 +1,410 @@
+{% extends "visiters/base.html" %}
+{% block content %}
+{% load static %}
+
+
+<div class="users-colour">
+  <!-- first block -->
+  <div class="genralinfo">
+      <div class="genralinfo-generalinfo">
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{total}} </span>
+            <span class="genralinfo-head"> Current Visits </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{scount}} </span>
+            <span class="genralinfo-head"> Scheduled Visit </span>
+          </div>
+        </div>
+
+        <div class="genralinfo-sub">
+          <div class="second">
+            <span class="genralinfo-data"> {{CCount}} </span>
+            <span class="genralinfo-head"> Completed Visit </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  <!-- third block  -->
+  <div class="Rectangle-15-checkin">
+    <div class="form">
+      <h5 class="Check-in-a-Visitor2">Check-in visitor</h5>
+
+      <p class="Visitor-Details"> Visitor's Details</p>
+
+      <div class="Line-15-checkin"></div>
+      <form action="/checkin/" onsubmit="return validate()" method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="">
+          <input type="text" class="Rectangle-17-checkin firstnameimage-checkin" placeholder="first Name"
+            name="firstname" id="firstname" required onkeyup='saveValue(this);'>
+          <small></small>
+        </div>
+        <div class="">
+          <input type="text" class="Rectangle-17-checkin lastnameimg" placeholder="Last Name" name="lastname"
+            id="lastname" required onkeyup='saveValue(this);'>
+          <small></small>
+        </div>
+        <div class="">
+          <input type="text" class="Rectangle-17-checkin companyimg" placeholder="Company Name" name="compname"
+            id="compname" required onkeyup='saveValue(this);'>
+          <small></small>
+        </div>
+        <div class="">
+          <input type="text" class="Rectangle-17-checkin companyaddreshimg" placeholder="Company Address" name="address"
+            id="address" required onkeyup='saveValue(this);'> 
+          <small></small>
+        </div>
+
+        <div class="">
+          <label for="phonenum">Phone Number (format: +xxx-xxxxxxxxx):</label><br/>
+          <input id="phonenum" class="Rectangle-17-checkin phonenumberimg" name="phonenumber" placeholder="+234-XXXXXXXXXX"  type="tel" pattern="^\+\d{3}[ -]{0,1}\d{10,11}$" required onkeyup='saveValue(this);'>
+        </div>
+
+        <div class="">
+
+          <input type="text" class="Rectangle-17-checkin pourposeofvisitimg" placeholder="Purpose of Visit"
+
+            name="purposeofvisit" id="purposeifvisit" required onchange='saveValue(this);'>
+          <small></small>
+        </div>
+        <p class="Host-Details">Host Details</p>
+        <div class="Line-15-checkin"></div>
+
+        <div>
+          <input list="browsers" name="hostname" class="Rectangle-17-checkin hostnameimage" id="hostname"
+          oninput="fun2(this.value)" placeholder="Host name" onchange='saveValue(this);' />
+          <datalist id="browsers" >
+            {% for h in host %}
+            <!-- <input type="text" id="dataHostDepartment"  value="{{h.Host_phone_number}}"> -->
+            <option value="{{h.hostname}}"  label="{{h.Host_phone_number}} & {{h.department}} "></option>
+            <!-- <a>{{h.hostname}}</a>
+            <a>{{h.Host_phone_number}}</a> -->
+            {% endfor %}
+            <hr>
+          </datalist>
+        </div>
+
+        <div>
+          <input list="Hostdepartment" name="department" class="Rectangle-17-checkin departmentimage" id="department"
+            placeholder="Department" onchange='saveValue(this);' onkeyup='saveValue(this);' readonly/>
+         
+        </div>
+        <div>
+          <input list="phoneNO" name="HostPhoneNumber" class="Rectangle-17-checkin hostnameimage" id="phoneno"
+            placeholder="Host Phone number" onchange='saveValue(this);' onkeyup='saveValue(this);' readonly/> 
+        </div>
+
+        <div class="">
+          <input type="text" class="Rectangle-38-checkin" name="image" id="image" hidden onkeyup='saveValue(this);'>
+        </div>
+        <button type="submit" class="Rectangle-21-checkin"><span class="CHECK-IN-button">
+            CHECK-IN
+          </span></button>
+      </form>
+    </div>
+    <div class="card1">
+      <div class="card-content">
+        <div class="card-first">
+          <img class="statelogo-big-logo-checkin" src="{% static 'images/statelogo@3x.png' %}" alt="">
+          <span class="RIVERS-STATE-GOVERNMENT-HOUSE-PORT-HARCOURT"> RIVERS STATE GOVERNMENT
+            HOUSE, PORT HARCOURT</span>
+        </div>
+        <img class="person-image"
+          src="{% static 'images/clipart-person-icon-cliparts-transparent-background-person-icon-person-icon-transparent-png-920_1070@3x.png' %}"
+          alt="">
+        <div style="text-align: center;">
+          <span class="JOHN-DOE">
+            Guest User
+          </span>
+        </div>
+        <div class="parent-rectange-41">
+          <div class="Rectangle-41">
+            <span class="HOST">
+             Host
+            </span>
+          </div>
+          <div class="child-2">
+            <span class="Hon-Justice-Amadi">
+             
+            </span>
+          </div>
+        </div>
+        <div class="parent-rectange-41">
+          <div class="Rectangle-41">
+            <span class="HOST">
+              Date
+            </span>
+          </div>
+          <div class="child-2">
+            <span class="Hon-Justice-Amadi">
+              
+            </span>
+          </div>
+        </div>
+        <div class="parent-rectange-41">
+          <div class="Rectangle-41">
+            <span class="HOST2">
+              CHECK-IN
+            </span>
+          </div>
+          <div class="child-2">
+            <span class="Hon-Justice-Amadi">
+              
+            </span>
+          </div>
+        </div>
+        <div class="Rectangle-40">
+          <span class="VISITOR-card">
+            VISITOR
+          </span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction:column; margin-top:20px">
+        <button id="stop-camera" hidden class="btn btn-primary">Stop Camera</button>
+        <button id="start-camera" type="button" class="capture-image" data-toggle="modal"
+          data-target="#exampleModalCenter">
+          <span class="CAPTURE-IMAGE-TEXT">
+            CAPTURE IMAGE
+          </span>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Capture Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <video id="video" width="480" height="240" autoplay></video>
+        <canvas style="display: none;" id="canvas" width="170" height="197"></canvas>
+      </div>
+      <div class="modal-footer">
+        <button id="click-photo" class="btn btn-primary">Click Photo</button>
+        <button style="display: none;" id="re-click-photo" class="btn btn-primary">Click Again</button>
+        <button style="display: none;" id="select-photo" type="button" class="btn btn-secondary"
+          data-dismiss="modal">Select Image</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function fun(x) {
+
+  }
+
+  
+
+  function fun2() {
+    var val = document.getElementById("hostname").value;
+    var opts = document.getElementById('browsers').childNodes;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].value === val) {
+        // An item was selected from the list!
+        // yourCallbackHere()
+        const myArray = opts[i].label.split(" ");
+        document.getElementById("department").value = myArray[2];
+        document.getElementById("phoneno").value = myArray[0];
+
+        saveValue(document.getElementById("department"));
+
+        saveValue(document.getElementById("phoneno"));
+
+        break;
+      }
+    }
+  }
+
+  document.getElementById("firstname").value = getSavedValue("firstname");    // set the value to this input
+  document.getElementById("lastname").value = getSavedValue("lastname");   // set the value to this input
+  document.getElementById("compname").value = getSavedValue("compname"); 
+  document.getElementById("address").value = getSavedValue("address"); 
+  document.getElementById("phonenum").value = getSavedValue("phonenum"); 
+  document.getElementById("purposeifvisit").value = getSavedValue("purposeifvisit"); 
+  document.getElementById("hostname").value = getSavedValue("hostname"); 
+  document.getElementById("department").value = getSavedValue("department"); 
+  document.getElementById("firstname").value = getSavedValue("firstname"); 
+  document.getElementById("phoneno").value = getSavedValue("phoneno"); 
+  
+  
+  
+  
+  /* Here you can add more inputs to set value. if it's saved */
+
+  //Save the value function - save it to localStorage as (ID, VALUE)
+  function saveValue(e){
+      var id = e.id;  // get the sender's id to save it . 
+      var val = e.value; // get the value. 
+      localStorage.setItem(id, val);// Every time user writing something, the localStorage's value will override . 
+  }
+
+  //get the saved value function - return the value of "v" from localStorage. 
+  function getSavedValue  (v){
+      if (!localStorage.getItem(v)) {
+          return "";// You can change this to your defualt value. 
+      }
+      return localStorage.getItem(v);
+  }
+ 
+  
+  let camera_button = document.querySelector("#start-camera");
+  let stop_camera_button = document.querySelector("#stop-camera");
+  let video = document.querySelector("#video");
+  let click_button = document.querySelector("#click-photo");
+  let re_click_button = document.querySelector("#re-click-photo");
+  let select_photo = document.querySelector("#select-photo");
+  let canvas = document.querySelector("#canvas");
+  let stream;
+
+  async function startStream() {
+    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    video.srcObject = stream;
+  }
+
+  function stopStream() {
+    video.pause();
+    video.src = "";
+    video.srcObject = null;
+    stream.getTracks().forEach(function (track) {
+      if (track.readyState == 'live') {
+        track.stop();
+      }
+    });
+  }
+
+  camera_button.addEventListener('click', function () {
+    startStream();
+    //document.getElementById('click-photo')
+  });
+
+  stop_camera_button.addEventListener('click', async function () {
+    stopStream();
+    //document.getElementById('click-photo')
+  });
+
+  click_button.addEventListener('click', function () {
+    canvas.style.display = "block";
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    let image_data_url = canvas.toDataURL('image/jpeg');
+    // data url of the image
+    document.getElementById('image').value = image_data_url;
+    console.log(image_data_url.length);
+    stopStream();
+    video.style.display = "none";
+    click_button.style.display = "none";
+    re_click_button.style.display = "block";
+    select_photo.style.display = "block";
+
+  });
+
+  re_click_button.addEventListener('click', function () {
+    canvas.style.display = "none";
+    video.style.display = "block";
+    startStream();
+    click_button.style.display = "block";
+    re_click_button.style.display = "none";
+    select_photo.style.display = "none";
+  });
+
+  function check() {
+    alert("hello");
+  }
+
+  function validate() {
+    var firstname = document.getElementById('firstname').value.trim()
+
+    var hostname = document.getElementById('hostname').value.trim()
+
+    var department = document.getElementById('department').value.trim()
+
+    var lastname = document.getElementById('lastname').value.trim()
+
+    var compname = document.getElementById('compname').value.trim()
+
+    var address = document.getElementById('address').value.trim()
+
+
+    var purposeifvisit = document.getElementById('purposeifvisit').value.trim()
+
+    var imageurl = document.getElementById('image').value
+    if ((firstname.length <= 1) || (firstname.length >= 30)) {
+      alert("First name is not valid")
+      return false
+    }
+    else if (imageurl.length == 0) {
+      alert("Image not found")
+      return false
+    }
+    else if ((hostname.length <= 2) || (hostname.length >= 30)) {
+      alert("Host name is not valid")
+      return false
+    }
+    else if ((department.length <= 1) || (department.length >= 50)) {
+      alert("Department name is not valid")
+      return false
+    }
+    else if ((lastname.length <= 1) || (lastname.length >= 30)) {
+      alert("Last name is not valid")
+      return false
+    }
+    else if ((compname.length <= 2) || (lastname.length >= 50)) {
+      alert("Company name is not valid")
+      return false
+    }
+    
+    else if ((purposeifvisit.length <= 2) || (purposeifvisit.length >= 100)) {
+      alert("Purpose of visit is not valid !! ")
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
+  /*dropdown function */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  }
+  function openWindow() {
+    var win = window.open('capture-image', 'New Window', 'width=1000,height=500');
+    win.focus();
+  }
+</script>
+{% endblock%}

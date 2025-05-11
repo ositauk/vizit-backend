@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+
+
+<section class="row" border border-danger>
+<div class="Ellipse-1"></div>
+    <img src="{% static 'vizit_logo.jpg' %}" class="logo-Blue"></div>
+
+</section>
+<section class="container-fluid" border border-black>
+    <section class="row justify-content-center">
+        <section class="col-1 col-md-7">
+            </section>
+            <div class="border form-image border-primary">
+                <img src="{% static 'Login_img.png' %}" class="side-desg"></div>
+
+
+
+            <section class="col-md-5" border border-primary>
+
+                <form class="form-container" action="" method="post">
+                {% csrf_token %}
+                <section class="m-4"><h4 class="text-center">User Login</h4></section>
+                  <div class="form-group ">
+
+                        <input type="text" name="username" class="Rectangle-1 username_textBox" placeholder="Username" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" class="Rectangle-1 password_textBox" id="exampleInputPassword1" placeholder="Password" required>
+                  </div>
+
+                {% if messages %}
+                 {% for message in messages %}
+                    <div class="m-3"><a href="#"><p class="text-center text-danger">{{ message }}</p></a></div>
+                 {% endfor %}
+                {% endif %}
+
+                  <button type="submit" class="Rectangle-3">Login</button>
+                <div class="m-4"><a href="{% url 'forget_password' %}"><span class="Forgot-username-or-password
+                    "><span class="text-style-1">Forgot</span> username
+                      <span class="text-style-1">or</span>
+                      password <span class="text-style-1">?</span></span></a></div>
+
+            </form>
+        </section>
+    </section>
+</section>
+<section class="row border border-danger">
+    <form class="form-faq">
+        <span class="FAQs-Support-Contact-Us">
+  F
+</span>
+    </form>
+    </section>
+</section>
+
+
+</body>
+</html>
+
+<!--another--------------------------------------------------------------->
