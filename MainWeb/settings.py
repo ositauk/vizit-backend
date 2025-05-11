@@ -1,5 +1,4 @@
 from pathlib import Path
-import django_heroku
 import os
 # import mongoengine
 
@@ -10,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-yp23c9-=((dq@zs5#*#7^p)gqadvfiq$$)bowmvu1t*yo8#=ax'
+SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-dev-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
 
 # Application definition
 
@@ -69,25 +68,13 @@ WSGI_APPLICATION = 'MainWeb.wsgi.application'
 
 
 import dj_database_url
-import os
+
 # DATABASES = {
-#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+#     'default': dj_database_url.config(conn_max_age=600)
 # }
 
 DATABASES = {
-  'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'd3lvdn6j1qntj2',
-
-        'USER': 'jngepmxveblmsa',
-
-        'PASSWORD': 'a166bdcea6b2aef5a15bdd3ec9f319f4be5df22cdc9f36ed25a4d0519b181b9f',
-
-        'HOST': 'ec2-3-95-130-249.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-  }
+  'default': dj_database_url.config(conn_max_age=600)
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -174,9 +161,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
