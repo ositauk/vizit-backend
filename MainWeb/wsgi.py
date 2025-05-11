@@ -14,3 +14,8 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MainWeb.settings')
 
 application = get_wsgi_application()
+
+import os
+if os.environ.get("RUN_SUPERUSER", "false") == "true":
+    import subprocess
+    subprocess.call(["python", "create_superuser.py"])
